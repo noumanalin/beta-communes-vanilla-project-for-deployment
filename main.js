@@ -1,49 +1,24 @@
 // main.js
-import initializeSlick from "/beta-communes-vanilla-project-for-deployment/components/logo-section/secript.js";
-import initializeSlickSlider2 from '/beta-communes-vanilla-project-for-deployment/components/slider2/slider2.js';
-import initializeReviewSlider from '/beta-communes-vanilla-project-for-deployment/components/review/review.js';
-import initializeViewToggle from '/beta-communes-vanilla-project-for-deployment/pages/collections/earring-collection/earring-collection.js';
+import initializeSlick from "./components/logo-section/secript.js";
+import initializeSlickSlider2 from './components/slider2/slider2.js';
+import initializeReviewSlider from './components/review/review.js';
+import initializeViewToggle from './pages/collections/earring-collection/earring-collection.js'
+// myAlert("guten tag!")
 
-// Environment configuration
-const REPO_NAME = 'beta-communes-vanilla-project-for-deployment';
-const IS_GITHUB_PAGES = window.location.host.includes('github.io');
-const BASE_PATH = IS_GITHUB_PAGES ? `/${REPO_NAME}` : '';
 
-// Enhanced path resolver with multiple fallback options
-function resolvePath(path) {
-  // Remove leading/trailing slashes
-  path = path.replace(/^\/|\/$/g, '');
-  
-  // For GitHub Pages
-  if (IS_GITHUB_PAGES) {
-    return `/${REPO_NAME}/${path}`;
-  }
-  
-  // For local development
-  return `/${path}`;
-}
 
-// Robust HTML loader with multiple fallback attempts
+// Base URL for all requests
+const BASE_URL = '';
+
+// Load a single HTML file as string
 async function loadHTML(path) {
-  const pathsToTry = [
-    resolvePath(path), // Primary path with base
-    `/${path}`, // Root-relative path
-    path, // Direct path
-    `./${path}` // Relative path
-  ];
-
-  for (const tryPath of pathsToTry) {
-    try {
-      const res = await fetch(tryPath);
-      if (res.ok) return await res.text();
-    } catch (err) {
-      console.warn(`Failed to load ${tryPath}, trying next option...`);
-    }
-  }
-  throw new Error(`Failed to load ${path} after multiple attempts`);
+  const normalizedPath = path.startsWith('/') ? path.slice(1) : path;
+  const res = await fetch(normalizedPath);
+  if (!res.ok) throw new Error(`Failed to load ${path}`);
+  return await res.text();
 }
 
-// Component injection
+// modify injectComponents to render component inside component
 async function injectComponents(container) {
   const componentHolders = container.querySelectorAll('[data-component]');
 
@@ -53,7 +28,10 @@ async function injectComponents(container) {
       const html = await loadHTML(path);
       const tempWrapper = document.createElement('div');
       tempWrapper.innerHTML = html;
+
+      // Recursively inject nested components
       await injectComponents(tempWrapper);
+
       holder.replaceWith(...tempWrapper.childNodes);
     } catch (err) {
       console.error(`Error loading component ${path}:`, err);
@@ -62,11 +40,13 @@ async function injectComponents(container) {
   }
 }
 
-// Dropdown initialization
+
+// For drop dwon
 function initializeDropdowns() {
   document.querySelectorAll('.relative.inline-block.text-left').forEach(dropdown => {
     const dropdownBtn = dropdown.querySelector('#dropdownButton');
     const dropdownMenu = dropdown.querySelector('#dropdownMenu');
+
     if (!dropdownBtn || !dropdownMenu) return;
 
     dropdownBtn.addEventListener('click', (e) => {
@@ -78,6 +58,7 @@ function initializeDropdowns() {
       item.addEventListener('click', () => {
         const imgSrc = item.querySelector('img').src;
         const currency = item.getAttribute('data-value');
+
         dropdownBtn.querySelector('img').src = imgSrc;
         dropdownBtn.querySelector('span').textContent = currency;
         dropdownMenu.classList.add('hidden');
@@ -86,75 +67,60 @@ function initializeDropdowns() {
   });
 }
 
-// Route configuration with base path
+
+// Route configuration
 const routes = {
-  '/': `${BASE_PATH}/pages/home.html`,
-  '/about': `${BASE_PATH}/pages/about.html`,
-  '/collections/bracelet': `${BASE_PATH}/pages/collections/bracelet.html`,
-  '/collections/bridal-jewellery': `${BASE_PATH}/pages/collections/bridal-jewellery.html`,
-  '/collections/earring': `${BASE_PATH}/pages/collections/earring-collection/earring.html`,
-  '/collections/mens-jewellery': `${BASE_PATH}/pages/collections/mens-jewellery.html`,
-  '/collections/engagement-ring': `${BASE_PATH}/pages/collections/engagement-ring.html`,
-  '/account/register': `${BASE_PATH}/pages/auth/register.html`,
-  '/account/signin': `${BASE_PATH}/pages/auth/signin.html`,
-  '/404.html': `${BASE_PATH}/pages/404.html`
+  '/': '/pages/home.html',
+  '/about': '/pages/about.html',
+  '/collections/bracelet': '/pages/collections/bracelet.html',
+  '/collections/bridal-jewellery': '/pages/collections/bridal-jewellery.html',
+  '/collections/earring': '/pages/collections/earring-collection/earring.html',
+  '/collections/mens-jewellery': '/pages/collections/mens-jewellery.html',
+  '/collections/engagement-ring': '/pages/collections/engagement-ring.html',
+  '/account/register': '/pages/auth/register.html',
+  '/account/signin': '/pages/auth/signin.html',
+
+  // Add other routes here
 };
 
-// Error page template
-function showErrorPage(error) {
-  return `
-    <div class="error p-4 bg-red-100 text-red-800">
-      <h2 class="text-xl font-bold">Page Load Error</h2>
-      <p>${error.message}</p>
-      <div class="mt-4">
-        <button onclick="window.location.href='${BASE_PATH || '/'}'" 
-          class="px-4 py-2 bg-blue-500 text-white rounded mr-2">
-          Go Home
-        </button>
-        <button onclick="window.location.reload()" 
-          class="px-4 py-2 bg-gray-500 text-white rounded">
-          Reload
-        </button>
-      </div>
-    </div>
-  `;
-}
-
-// Render page with exact route matching
-const currentPath = window.location.pathname.replace(BASE_PATH, '') || '/';
-async function renderPage(currentPath) {
+// Load and render page
+async function renderPage(path = '/') {
   const app = document.getElementById('app');
   try {
-    // Use exact match only
-    const pagePath = routes[currentPath] || routes['/404.html'];
+    const pagePath = routes[path] || '/pages/404.html';
     const pageHTML = await loadHTML(pagePath);
     
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = pageHTML;
+
+    await injectComponents(tempDiv);
+    app.innerHTML = tempDiv.innerHTML;
+    
     await injectComponents(tempDiv);
     app.innerHTML = tempDiv.innerHTML;
 
-    // Initialize components
+    // Initialize dropdowns
     initializeDropdowns();
+
+    // 🆕 Initialize slick (after logos are in the DOM)
     initializeSlick();
     initializeSlickSlider2();
     initializeReviewSlider();
     initializeViewToggle();
 
-    // Update active navigation
+
+    // Update active link in navbar
     document.querySelectorAll('[data-link]').forEach(link => {
-      const linkPath = link.getAttribute('href');
-      const isActive = linkPath === path;
+      const isActive = link.getAttribute('href') === path;
       link.classList.toggle('active-golden', isActive);
-      link.classList.toggle('hover-effect', !isActive);
+      link.classList.toggle('hover-effect', !isActive); // Remove hover-effect if active
     });
   } catch (err) {
-    console.error('Render error:', err);
-    app.innerHTML = showErrorPage(err);
+    app.innerHTML = `<div class="error">Error: ${err.message}</div>`;
   }
 }
 
-// SPA navigation setup
+// Handle navigation
 function setupNavigation() {
   document.addEventListener('click', (e) => {
     const link = e.target.closest('a[data-link]');
@@ -166,22 +132,21 @@ function setupNavigation() {
     }
   });
 
+  // Handle browser back/forward
   window.addEventListener('popstate', () => {
     renderPage(window.location.pathname);
   });
 }
 
-// Initialize the application
+// Initialize the app
 function init() {
   setupNavigation();
-  
-  // Handle GitHub Pages redirect case
-  if (window.location.pathname === '/' && IS_GITHUB_PAGES) {
-    window.history.replaceState({}, '', `${BASE_PATH}/`);
-  }
-  
   renderPage(window.location.pathname);
 }
 
-// Start the app
+// Start the application
 init();
+
+
+
+
