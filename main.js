@@ -1,35 +1,49 @@
 // main.js
-import initializeSlick from "./components/logo-section/secript.js";
-import initializeSlickSlider2 from './components/slider2/slider2.js';
-import initializeReviewSlider from './components/review/review.js';
-import initializeViewToggle from './pages/collections/earring-collection/earring-collection.js';
+import initializeSlick from "/beta-communes-vanilla-project-for-deployment/components/logo-section/secript.js";
+import initializeSlickSlider2 from '/beta-communes-vanilla-project-for-deployment/components/slider2/slider2.js';
+import initializeReviewSlider from '/beta-communes-vanilla-project-for-deployment/components/review/review.js';
+import initializeViewToggle from '/beta-communes-vanilla-project-for-deployment/pages/collections/earring-collection/earring-collection.js';
 
-// Detect GitHub Pages environment
-const IS_GITHUB_PAGES = window.location.host.includes('github.io');
+// Environment configuration
 const REPO_NAME = 'beta-communes-vanilla-project-for-deployment';
+const IS_GITHUB_PAGES = window.location.host.includes('github.io');
 const BASE_PATH = IS_GITHUB_PAGES ? `/${REPO_NAME}` : '';
 
-// Normalize path for GitHub Pages (e.g., /REPO_NAME/pages/about.html)
-function normalizePath(path) {
-  let normalized = path.startsWith('/') ? path : `/${path}`;
-  return IS_GITHUB_PAGES ? `${BASE_PATH}${normalized}` : normalized;
-}
-
-// Load HTML content
-async function loadHTML(path) {
-  const fullPath = normalizePath(path);
-
-  try {
-    const res = await fetch(fullPath);
-    if (!res.ok) throw new Error(`Failed to load ${path}`);
-    return await res.text();
-  } catch (err) {
-    console.error(`Error loading ${fullPath}:`, err);
-    throw err;
+// Enhanced path resolver with multiple fallback options
+function resolvePath(path) {
+  // Remove leading/trailing slashes
+  path = path.replace(/^\/|\/$/g, '');
+  
+  // For GitHub Pages
+  if (IS_GITHUB_PAGES) {
+    return `/${REPO_NAME}/${path}`;
   }
+  
+  // For local development
+  return `/${path}`;
 }
 
-// Inject components recursively
+// Robust HTML loader with multiple fallback attempts
+async function loadHTML(path) {
+  const pathsToTry = [
+    resolvePath(path), // Primary path with base
+    `/${path}`, // Root-relative path
+    path, // Direct path
+    `./${path}` // Relative path
+  ];
+
+  for (const tryPath of pathsToTry) {
+    try {
+      const res = await fetch(tryPath);
+      if (res.ok) return await res.text();
+    } catch (err) {
+      console.warn(`Failed to load ${tryPath}, trying next option...`);
+    }
+  }
+  throw new Error(`Failed to load ${path} after multiple attempts`);
+}
+
+// Component injection
 async function injectComponents(container) {
   const componentHolders = container.querySelectorAll('[data-component]');
 
@@ -48,7 +62,7 @@ async function injectComponents(container) {
   }
 }
 
-// Dropdown logic
+// Dropdown initialization
 function initializeDropdowns() {
   document.querySelectorAll('.relative.inline-block.text-left').forEach(dropdown => {
     const dropdownBtn = dropdown.querySelector('#dropdownButton');
@@ -72,42 +86,61 @@ function initializeDropdowns() {
   });
 }
 
-// Exact route mapping
+// Route configuration with base path
 const routes = {
-  '/': 'pages/home.html',
-  '/about': 'pages/about.html',
-  '/collections/bracelet': 'pages/collections/bracelet.html',
-  '/collections/bridal-jewellery': 'pages/collections/bridal-jewellery.html',
-  '/collections/earring': 'pages/collections/earring-collection/earring.html',
-  '/collections/mens-jewellery': 'pages/collections/mens-jewellery.html',
-  '/collections/engagement-ring': 'pages/collections/engagement-ring.html',
-  '/account/register': 'pages/auth/register.html',
-  '/account/signin': 'pages/auth/signin.html',
-  '/404.html': 'pages/404.html'
+  '/': `${BASE_PATH}/pages/home.html`,
+  '/about': `${BASE_PATH}/pages/about.html`,
+  '/collections/bracelet': `${BASE_PATH}/pages/collections/bracelet.html`,
+  '/collections/bridal-jewellery': `${BASE_PATH}/pages/collections/bridal-jewellery.html`,
+  '/collections/earring': `${BASE_PATH}/pages/collections/earring-collection/earring.html`,
+  '/collections/mens-jewellery': `${BASE_PATH}/pages/collections/mens-jewellery.html`,
+  '/collections/engagement-ring': `${BASE_PATH}/pages/collections/engagement-ring.html`,
+  '/account/register': `${BASE_PATH}/pages/auth/register.html`,
+  '/account/signin': `${BASE_PATH}/pages/auth/signin.html`,
+  '/404.html': `${BASE_PATH}/pages/404.html`
 };
 
-// Render page by exact route match only
+// Error page template
+function showErrorPage(error) {
+  return `
+    <div class="error p-4 bg-red-100 text-red-800">
+      <h2 class="text-xl font-bold">Page Load Error</h2>
+      <p>${error.message}</p>
+      <div class="mt-4">
+        <button onclick="window.location.href='${BASE_PATH || '/'}'" 
+          class="px-4 py-2 bg-blue-500 text-white rounded mr-2">
+          Go Home
+        </button>
+        <button onclick="window.location.reload()" 
+          class="px-4 py-2 bg-gray-500 text-white rounded">
+          Reload
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+// Render page with exact route matching
 async function renderPage(path = '/') {
   const app = document.getElementById('app');
   try {
-    const routePath = routes[path] ? path : '/404.html';
-    const pagePath = routes[routePath];
+    // Use exact match only
+    const pagePath = routes[path] || routes['/404.html'];
     const pageHTML = await loadHTML(pagePath);
-
+    
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = pageHTML;
     await injectComponents(tempDiv);
-
     app.innerHTML = tempDiv.innerHTML;
 
-    // Init page-level JS
+    // Initialize components
     initializeDropdowns();
     initializeSlick();
     initializeSlickSlider2();
     initializeReviewSlider();
     initializeViewToggle();
 
-    // Set active nav
+    // Update active navigation
     document.querySelectorAll('[data-link]').forEach(link => {
       const linkPath = link.getAttribute('href');
       const isActive = linkPath === path;
@@ -116,18 +149,11 @@ async function renderPage(path = '/') {
     });
   } catch (err) {
     console.error('Render error:', err);
-    app.innerHTML = `
-      <div class="error p-4 bg-red-100 text-red-800">
-        Error loading page: ${err.message}
-        <button onclick="window.location.reload()" class="ml-4 px-3 py-1 bg-blue-500 text-white rounded">
-          Reload
-        </button>
-      </div>
-    `;
+    app.innerHTML = showErrorPage(err);
   }
 }
 
-// Handle SPA-like navigation
+// SPA navigation setup
 function setupNavigation() {
   document.addEventListener('click', (e) => {
     const link = e.target.closest('a[data-link]');
@@ -144,16 +170,17 @@ function setupNavigation() {
   });
 }
 
-// App start
+// Initialize the application
 function init() {
   setupNavigation();
-
-  // Support deep linking from GitHub Pages redirect
-  const params = new URLSearchParams(window.location.search);
-  const redirectPath = params.get('redirect');
-  const initialPath = redirectPath || window.location.pathname;
-
-  renderPage(initialPath);
+  
+  // Handle GitHub Pages redirect case
+  if (window.location.pathname === '/' && IS_GITHUB_PAGES) {
+    window.history.replaceState({}, '', `${BASE_PATH}/`);
+  }
+  
+  renderPage(window.location.pathname);
 }
 
+// Start the app
 init();
