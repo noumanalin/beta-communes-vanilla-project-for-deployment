@@ -1,0 +1,1 @@
+# beta-communes-vanilla-project-for-deployment
