@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <meta http-equiv="refresh" content="0; url=/" />
+  <script>
+    // Get the current path (excluding repo name)
+    const repo = 'beta-communes-vanilla-project-for-deployment';
+    const currentPath = window.location.pathname.replace(`/${repo}`, '');
+
+    // Redirect to index.html with original path in query string
+    const redirectUrl = `/${repo}/index.html?redirect=${currentPath}`;
+    window.location.replace(redirectUrl);
+  </script>
+</head>
+<body>
+  <p>Redirecting...</p>
+</body>
+</html>
