@@ -6,15 +6,26 @@ import initializeViewToggle from './pages/collections/earring-collection/earring
 // myAlert("guten tag!")
 
 
-// Base URL for all requests
-const BASE_URL = `${window.location.origin}/beta-communes-vanilla-project-for-deployment`;
-
+// Update the BASE_URL and path handling
+const BASE_URL = window.location.origin;
+const IS_GITHUB_PAGES = window.location.host.includes('github.io');
 
 // Load a single HTML file as string
 async function loadHTML(path) {
-  // Ensure path starts with /
-  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
-  const res = await fetch(`${BASE_URL}${normalizedPath}`);
+  // Adjust path for GitHub Pages
+  let normalizedPath;
+  if (IS_GITHUB_PAGES) {
+    // For GitHub Pages, we need to account for the repository name in the path
+    const repoPath = '/beta-communes-vanilla-project-for-deployment';
+    normalizedPath = path.startsWith('/') 
+      ? `${repoPath}${path}`
+      : `${repoPath}/${path}`;
+  } else {
+    // For local development
+    normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  }
+  
+  const res = await fetch(normalizedPath);
   if (!res.ok) throw new Error(`Failed to load ${path}`);
   return await res.text();
 }
@@ -72,17 +83,17 @@ function initializeDropdowns() {
 
 // Route configuration
 const routes = {
-  '/': '/pages/home.html',
-  '/about': '/pages/about.html',
-  '/collections/bracelet': '/pages/collections/bracelet.html',
-  '/collections/bridal-jewellery': '/pages/collections/bridal-jewellery.html',
-  '/collections/earring': '/pages/collections/earring-collection/earring.html',
-  '/collections/mens-jewellery': '/pages/collections/mens-jewellery.html',
-  '/collections/engagement-ring': '/pages/collections/engagement-ring.html',
-  '/account/register': '/pages/auth/register.html',
-  '/account/signin': '/pages/auth/signin.html',
-
-  // Add other routes here
+  '/': IS_GITHUB_PAGES ? '/beta-communes-vanilla-project-for-deployment/pages/home.html' : '/pages/home.html',
+  '/about': IS_GITHUB_PAGES ? '/beta-communes-vanilla-project-for-deployment/pages/about.html' : '/pages/about.html',
+  // Update all other routes similarly...
+  '/collections/bracelet': IS_GITHUB_PAGES ? '/beta-communes-vanilla-project-for-deployment/pages/collections/bracelet.html' : '/pages/collections/bracelet.html',
+  '/collections/bridal-jewellery': IS_GITHUB_PAGES ? '/beta-communes-vanilla-project-for-deployment/pages/collections/bridal-jewellery.html' : '/pages/collections/bridal-jewellery.html',
+  '/collections/earring': IS_GITHUB_PAGES ? '/beta-communes-vanilla-project-for-deployment/pages/collections/earring-collection/earring.html' : '/pages/collections/earring-collection/earring.html',
+  '/collections/mens-jewellery': IS_GITHUB_PAGES ? '/beta-communes-vanilla-project-for-deployment/pages/collections/mens-jewellery.html' : '/pages/collections/mens-jewellery.html',
+  '/collections/engagement-ring': IS_GITHUB_PAGES ? '/beta-communes-vanilla-project-for-deployment/pages/collections/engagement-ring.html' : '/pages/collections/engagement-ring.html',
+  '/account/register': IS_GITHUB_PAGES ? '/beta-communes-vanilla-project-for-deployment/pages/auth/register.html' : '/pages/auth/register.html',
+  '/account/signin': IS_GITHUB_PAGES ? '/beta-communes-vanilla-project-for-deployment/pages/auth/signin.html' : '/pages/auth/signin.html',
+  '/404.html': IS_GITHUB_PAGES ? '/beta-communes-vanilla-project-for-deployment/pages/404.html' : '/pages/404.html'
 };
 
 // Load and render page
