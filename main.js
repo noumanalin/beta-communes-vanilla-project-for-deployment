@@ -6,9 +6,9 @@ import initializeViewToggle from './pages/collections/earring-collection/earring
 // myAlert("guten tag!")
 
 
-
 // Base URL for all requests
-const BASE_URL = window.location.origin;
+const BASE_URL = `${window.location.origin}/beta-communes-vanilla-project-for-deployment`;
+
 
 // Load a single HTML file as string
 async function loadHTML(path) {
@@ -18,6 +18,7 @@ async function loadHTML(path) {
   if (!res.ok) throw new Error(`Failed to load ${path}`);
   return await res.text();
 }
+
 
 // modify injectComponents to render component inside component
 async function injectComponents(container) {
