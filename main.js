@@ -121,11 +121,12 @@ function showErrorPage(error) {
 }
 
 // Render page with exact route matching
-async function renderPage(path = '/') {
+const currentPath = window.location.pathname.replace(BASE_PATH, '') || '/';
+async function renderPage(currentPath) {
   const app = document.getElementById('app');
   try {
     // Use exact match only
-    const pagePath = routes[path] || routes['/404.html'];
+    const pagePath = routes[currentPath] || routes['/404.html'];
     const pageHTML = await loadHTML(pagePath);
     
     const tempDiv = document.createElement('div');
