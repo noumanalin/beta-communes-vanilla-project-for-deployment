@@ -1,20 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Redirecting...</title>
-  <meta http-equiv="refresh" content="0; url=/" />
-  <script>
-    // Get the current path (excluding repo name)
-    const repo = 'beta-communes-vanilla-project-for-deployment';
-    const currentPath = window.location.pathname.replace(`/${repo}`, '');
-
-    // Redirect to index.html with original path in query string
-    const redirectUrl = `/${repo}/index.html?redirect=${currentPath}`;
-    window.location.replace(redirectUrl);
-  </script>
+  <meta charset="utf-8">
+  <title>Page Not Found</title>
+  <script type="module" src="main.js"></script>
 </head>
 <body>
-  <p>Redirecting...</p>
+  <div id="app">
+    <h1>Page Not Found</h1>
+    <p>Redirecting to home page...</p>
+  </div>
+  <script>
+    setTimeout(() => window.location.href = '/', 3000);
+  </script>
 </body>
 </html>
