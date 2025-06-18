@@ -134,4 +134,4 @@ function init() {
   renderPage(currentPath);
 }
 
-init();
+document.addEventListener('DOMContentLoaded', init);
