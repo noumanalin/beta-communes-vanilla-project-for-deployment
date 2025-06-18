@@ -1,0 +1,191 @@
+<style>
+  .div-media img {
+    animation: imgAnimate 8s ease-in-out infinite;
+    transform-origin: center;
+    transition: transform 0.5s ease;
+  }
+
+  @keyframes imgAnimate {
+    0% {
+      transform: scale(1);
+    }
+    30% {
+      transform: scale(1.03);
+    }
+    60% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .section-wrapper {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  .section-heading {
+    line-height: 1.2;
+  }
+
+  .section-text {
+    line-height: 1.8;
+    color: #4a4a4a;
+  }
+
+  .cta-link:hover img {
+    transform: translateX(4px);
+    transition: transform 0.3s ease;
+  }
+</style>
+
+<section class="section-wrapper bg-white container mx-auto flex flex-col md:flex-row gap-10 items-center px-6 md:px-0">
+  <!-- Content -->
+  <div class="div-content text-center md:text-left max-w-xl">
+    <p class="font-dance text-xl  mb-2">Designer Jewellery</p>
+    <h2 class="font-ancizar text-4xl md:text-5xl font-bold text-gray-900 section-heading mb-4">
+      Best Designer Furnished Your Dream Designs
+    </h2>
+    <p class="text-base md:text-lg section-text mb-6">
+      Sed viverra ipsum nunc aliquet bibendum enim facilisis gravida neque.
+      Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Et netus et
+      malesuada fames ac turpis egestas maecenas.
+    </p>
+
+    <a
+      href="#"
+      class="cta-link font-ancizar underline text-lg md:text-xl capitalize flex justify-center md:justify-start items-center gap-2 text-gray-800 hover:text-[#b68f35] font-medium transition-colors duration-300"
+    >
+      <img class="w-4 transition-all duration-300" src="../../assets/images/icons/arrow-tlid-u-r.svg" alt="arrow" />
+      <span>Shop Now</span>
+    </a>
+  </div>
+
+  <!-- Image -->
+  <div class="div-media flex-1 max-w-md md:max-w-none">
+    <img
+      class="w-full h-auto sm:h-[450px]  shadow-lg"
+      src="../../assets/images/best-desinger.png"
+      alt="Diamond Jewellery Image"
+    />
+  </div>
+</section>
+
+
+<!-- nameless card section -->
+
+<style>
+
+.icons {
+    display: none;
+}
+.icon-cart:hover .icons{
+    display: flex;
+}
+.btn-div {
+    display: none;
+}
+.icon-cart:hover .btn-div{
+    display: flex;
+}
+</style>
+
+<section class="text-center my-20 container mx-auto">
+
+    <div class="grid place-items-center gap-2 md:gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-10 p-3">
+<!-- 1 -->
+                <a href="#" class="icon-cart">
+            <div class="relative overflow-hidden  cart-s-img-div-with-icons">
+                <img src="../../../assets/images/products/shop18.jpg" alt="product image" class=" w-fit transition ease-in-out" />
+
+                <div class="icons absolute top-10 w-full  justify-center gap-9 z-10">
+
+                    <i class="fa fa-clone bg-white hover:bg-black hover:text-white p-2 transition-all duration-300 ease-in-out" aria-hidden="true"></i>
+                    <i class="fa fa-heart bg-white hover:bg-black hover:text-white p-2 transition-all duration-300 ease-in-out" aria-hidden="true"></i>
+                    <i class="fa fa-search bg-white hover:bg-black hover:text-white p-2 transition-all duration-300 ease-in-out" aria-hidden="true"></i>
+
+                </div>
+
+                <div class="absolute btn-div bottom-5 w-full justify-center ">
+                    <button class="cart-btn capitalize">add to cart</button>
+                </div>
+            </div>
+
+           <div class="text-center mt-3 font-[500]">
+             <p class="text-[20px] font-ancizar tracking-tighter hover:text-golden">Plain Couple Ring</p>
+             <span>$542.00</span>
+           </div>
+        </a>        
+        <!-- 2 -->
+        <a href="#" class="icon-cart">
+            <div class="relative overflow-hidden   cart-s-img-div-with-icons">
+                <img src="../../../assets/images/products/shop16.jpg" alt="product image" class=" w-fit transition ease-in-out" />
+
+                <div class="icons absolute top-10 w-full flex justify-center gap-9 z-10">
+
+                    <i class="fa fa-clone bg-white hover:bg-black hover:text-white p-2 transition-all duration-300 ease-in-out" aria-hidden="true"></i>
+                    <i class="fa fa-heart bg-white hover:bg-black hover:text-white p-2 transition-all duration-300 ease-in-out" aria-hidden="true"></i>
+                    <i class="fa fa-search bg-white hover:bg-black hover:text-white p-2 transition-all duration-300 ease-in-out" aria-hidden="true"></i>
+
+                </div>
+
+                <div class="absolute bottom-5 w-full btn-div justify-center ">
+                    <button class="cart-btn capitalize">add to cart</button>
+                </div>
+            </div>
+
+           <div class="text-center mt-3 font-[500]">
+             <p class="text-[20px] font-ancizar tracking-tighter hover:text-golden">Customized shape pendant necklace</p>
+             <span>$542.00</span>
+           </div>
+        </a>        
+        <!-- 3 -->
+        <a href="#" class="icon-cart">
+            <div class="relative overflow-hidden   cart-s-img-div-with-icons">
+                <img src="../../../assets/images/products/shop14.jpg" alt="product image" class=" w-fit transition ease-in-out" />
+
+                <div class="icons absolute top-10 w-full flex justify-center gap-9 z-10">
+
+                    <i class="fa fa-clone bg-white hover:bg-black hover:text-white p-2 transition-all duration-300 ease-in-out" aria-hidden="true"></i>
+                    <i class="fa fa-heart bg-white hover:bg-black hover:text-white p-2 transition-all duration-300 ease-in-out" aria-hidden="true"></i>
+                    <i class="fa fa-search bg-white hover:bg-black hover:text-white p-2 transition-all duration-300 ease-in-out" aria-hidden="true"></i>
+
+                </div>
+
+                <div class="absolute bottom-5 w-full btn-div justify-center ">
+                    <button class="cart-btn capitalize">add to cart</button>
+                </div>
+            </div>
+
+           <div class="text-center mt-3 font-[500]">
+             <p class="text-[20px] font-ancizar tracking-tighter hover:text-golden">Women's Bolo Bracelet</p>
+             <span>$542.00</span>
+           </div>
+        </a>        
+        <!-- 4 -->
+        <a href="#" class="icon-cart">
+            <div class="relative overflow-hidden  cart-s-img-div-with-icons">
+                <img src="../../../assets/images/products/shop04.jpg" alt="product image" class=" w-fit transition ease-in-out" />
+
+                <div class="icons absolute top-10 w-full flex justify-center gap-9 z-10">
+
+                    <i class="fa fa-clone bg-white hover:bg-black hover:text-white p-2 transition-all duration-300 ease-in-out" aria-hidden="true"></i>
+                    <i class="fa fa-heart bg-white hover:bg-black hover:text-white p-2 transition-all duration-300 ease-in-out" aria-hidden="true"></i>
+                    <i class="fa fa-search bg-white hover:bg-black hover:text-white p-2 transition-all duration-300 ease-in-out" aria-hidden="true"></i>
+
+                </div>
+
+                <div class="absolute bottom-5 w-full btn-div justify-center ">
+                    <button class="cart-btn capitalize">add to cart</button>
+                </div>
+            </div>
+
+           <div class="text-center mt-3 font-[500]">
+             <p class="text-[20px] font-ancizar tracking-tighter hover:text-golden">Designed Couple Ring</p>
+             <span>$542.00</span>
+           </div>
+        </a>
+    </div>
+
+</section>

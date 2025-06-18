@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Ancizar+Serif:ital,wght@0,300..900;1,300..900&family=Moon+Dance&display=swap');
+    /*  font-family: "Ancizar Serif", serif; */
+    /*  font-family: "Moon Dance", cursive; */
+
+
+
+:root {
+  --primary-color: #4e54c8;
+  --secondary-color: #8f94fb;
+  --text-color: #333;
+  --spacing: 1rem;
+  --color-gray-primay: #E2E2E2;
+  --color-gray-secondary: #F6F5F8;
+  --golden-color: #b68f35;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: var(--text-color);
+  /* padding: var(--spacing); */
+  margin: 0;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+/* utils classes */
+.font-dance {
+    font-family: "Moon Dance", cursive;
+}
+
+.font-ancizar {
+    font-family: "Ancizar Serif", serif;
+}
+
+button {
+  cursor: pointer;
+}
+
+
+.hover-effect, .active-golden {
+    position: relative;
+    /* margin: 0 30px;
+    padding: 0 10px; */
+    text-decoration: none;
+    color: inherit;
+}
+
+.hover-effect:hover {
+    color: var(--golden-color);
+}
+
+.hover-effect::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 0%;
+    background-image: linear-gradient(
+        to right,
+        var(--golden-color) 0%,
+        #ffd700 50%,
+        var(--golden-color) 100%
+    );
+    transition: all 0.2s linear;
+}
+
+.hover-effect:hover::before {
+    width: 100%;
+}
+
+.active-golden {
+    color: var(--golden-color);
+    font-weight: 500; 
+}
+
+.active-golden::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background-image: linear-gradient(
+        to right,
+        var(--golden-color) 0%,
+        #ffd700 50%,
+        var(--golden-color) 100%
+    );
+}
+
+
+
+
+
+/* =========== CART ================== */
+.cart-s-img-div-with-icons:hover img {
+    transform: scale(1.05);
+    rotate: 3deg;
+    transition: all 0.3s linear;
+}
+
+.cart-s-img-div-with-icons .icons {
+
+}
+
+.cart-btn {
+    font-size: 22px;
+    font-family: "Ancizar Serif", serif;
+    padding: 5px 18px;
+     background-image: linear-gradient(
+        to right,
+        var(--golden-color) 0%,
+        #ffd700 50%,
+        var(--golden-color) 100%
+    );
+}
+
+.cart-btn:hover {
+     background-image: linear-gradient(
+        to right,
+        var(--golden-color) 0%,
+        #ffd700 70%,
+        var(--golden-color) 100%
+    );
+}

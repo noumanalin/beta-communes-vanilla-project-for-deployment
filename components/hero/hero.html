@@ -1,0 +1,76 @@
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    height: calc(100vh - 182px);
+  }
+
+  .hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    animation: heartbeat 3s linear infinite;
+    transform-origin: center;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    color: white;
+    padding: 4rem 2rem;
+    max-width: 600px;
+  }
+
+@keyframes heartbeat {
+  0%{
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.02);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.03);
+  }
+  70% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1.01);
+  }
+}
+
+
+.storke-text {
+   -webkit-text-fill-color: transparent;
+   -webkit-text-stroke-width: 1px;
+}
+
+</style>
+
+<section class="hero w-full bg-gray-800 flex items-center justify-end">
+  <!-- Background image element -->
+  <img src="../../assets/images/hero-1.jpg" alt="Hero Background" class="hero-bg" />
+
+  <!-- Foreground content -->
+  <div class="container mx-auto flex items-center justify-end ">
+
+    <div class="hero-content bg-[rgba(5,5,5,0.4)] backdrop-blur-md shadow-md p-6 ">
+
+      <h3 class="storke-text text-5xl uppercase">40% off</h3>
+      <h3 class="text-7xl font-ancizar">Necklace</h3>
+      <p class="mt-2 uppercase font-bold">Find the best for your loved ones</p>
+      <p class="mt-1">Enim sit amet venenatis urna cursus. Aliquet nec ullamcorper sit amet <br> 
+         risus nullam eget felis. Tristique nulla aliquet emim tortor auctor</p>
+      <button class="cart-btn mt-4 ">Explore Now</button>
+    </div>
+
+  </div>
+
+</section>

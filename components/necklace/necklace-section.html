@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Necklace Collection</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .necklace div {
+      background-color: var(--color-gray-primay);
+    }
+
+    .necklace div a:hover {
+    color: var(--golden-color);
+  }
+  </style>
+</head>
+<body>
+
+<!-- 
+
+  2D structure:
+
+  ✅ First Necklace: should span rows 2, 3, 4 in column 1
+
+  ✅ Second Necklace: should span rows 1, 2, 3 in column 2
+
+  Achieve this using Tailwind's grid classes: grid-cols-2, grid-rows-4, row-start-*, row-span-*, and col-start-*.
+
+-->
+
+<section class="container mx-auto p-6 my-10">
+  <div class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-4 gap-6">
+
+    <!-- First Necklace: rows 2–4, column 1 -->
+    <div class="relative md:row-start-2 md:row-span-3 md:col-start-1 necklace">
+      <img src="../../assets/images/necklace1.jpg" alt="Antique Necklace" class="w-full h-auto shadow-md"/>
+
+      <div class="p-4 md:absolute md:bottom-[-40px] md:right-[-250px]">
+        <h2 class="text-xl font-dance text-gray-800">Exclusive Collection</h2>
+        <h3 class="text-lg font-ancizar font-3xl">Unique Birthstone Necklace</h3>
+        <p class="text-gray-700 text-sm max-w-[350px]">
+          Odio pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus.
+        </p>
+        <a href="#" class="font-ancizar text-2xl underline flex items-center gap-3">
+            <img src="../../assets/images/icons/arrow-tlid-u-r.svg" alt="arrow image" class="w-4 h-4" />
+            <span>Read More</span>
+          </a>
+      </div>
+    </div>
+
+    <!-- Second Necklace: rows 1–3, column 2 -->
+    <div class="relative md:row-start-1 md:row-span-3 md:col-start-2 necklace">
+      <img src="../../assets/images/necklace2.jpg" alt="Unique Birthstone Necklace" class="w-full h-auto shadow-md"/>
+
+      <div class="p-4 md:absolute md:top-[-40px] md:left-[-250px]">
+        <h2 class="text-xl font-dance text-gray-800">New Style</h2>
+        <h3 class="text-lg font-ancizar font-3xl ">Antique Necklace</h3>
+        <p class="text-gray-700 text-sm max-w-[350px]">
+          Tincidunt dui ut ornare lectus sit. Est sit amet facilisis magna etiam tempor orci eu
+        </p>
+        <a href="#" class="font-ancizar text-2xl underline flex items-center gap-3">
+          <img src="../../assets/images/icons/arrow-tlid-u-r.svg" alt="arrow image" class="w-4 h-4" />
+          <span>Read More</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+</head>
+<body>
+    <div data-component="./components/header/header.html"></div>
+    <div data-component="./components/navbar/navbar.html"></div>
+    <div data-component="./pages/collections/_components/collection-head.html"></div>
+
+    <section class="a-div py-5 px-2 bg-gray-200 max-w-[500px] mx-auto my-10">
+        <form action="" class="a-form flex flex-col items-start gap-4" required>
+            <input class="a-input w-full p-2  " type="email" name="email" placeholder="Enter Email" required>
+            <input class="a-input w-full p-2   " type="password" name="password" placeholder="Enter Your Password">
+            <button class="a-btn">Sign In</button>
+        </form>
+        <div class="flex a-div items-center justify-between my-4">
+            <a href="/" data-link>Forget Password</a>
+            <a href="/account/register" data-link="">Create Account</a>
+        </div>
+    </section>
+
+
+    <div data-component="./components/footer/footer.html"></div>
+
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./nav.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Nav Components */
+        .nav-component {
+            display: none;
+            width: 0%;
+            background-color: white;
+            left: 0;
+            bottom: -50px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .navigation-link:hover .nav-component {
+            display: block;
+            width: 100%;
+            animation: zoom-in 0.3s linear;
+        }
+
+        @keyframes zoom-in {
+            0% { opacity: 0; transform: scale(0.90); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Menu Toggle Styles */
+        .menu-toggle {
+            display: none;
+        }
+
+        .menu-icon {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1001;
+            position: relative;
+        }
+
+        .menu-icon span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: black;
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Menu Styles */
+        @media (max-width: 768px) {
+            nav {
+                position: relative;
+                z-index: 1000;
+            }
+            
+            .menu-icon {
+                display: flex;
+                order: -1; /* Move to left side */
+            }
+            
+            /* Transform the menu icon into a cross when checked */
+            .menu-toggle:checked ~ .menu-icon span:first-child {
+                transform: rotate(45deg) translate(7px, 7px);
+            }
+            
+            .menu-toggle:checked ~ .menu-icon span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .menu-toggle:checked ~ .menu-icon span:last-child {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            /* Navigation Links Container */
+            .nav-links-container {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: white;
+                flex-direction: column;
+                gap: 0;
+                padding: 0;
+                display: none;
+                opacity: 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                z-index: 999;
+                transition: opacity 0.3s ease;
+            }
+
+            .navigation-link {
+                padding: 15px;
+                border-bottom: 1px solid #eee;
+                width: 100%;
+            }
+
+            .menu-toggle:checked + .nav-links-container {
+                display: flex;
+                opacity: 1;
+            }
+
+            .nav-component {
+                display: none !important;
+            }
+            
+            /* Search Component */
+            .search-container {
+                order: 1; /* Move to right side */
+                margin-left: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="flex items-center justify-between md:justify-center sm:gap-10 md:gap-16 py-3 relative container mx-auto px-4">
+        <!-- Menu Toggle (hidden checkbox) -->
+        <input type="checkbox" id="menu-toggle" class="hidden menu-toggle" />
+        
+        <!-- Navigation Links Container (now immediately after checkbox) -->
+        <div class="nav-links-container flex items-center justify-center sm:gap-10 md:gap-16">
+            <div class="navigation-link">
+                <a id="rings" class="hover-effect" href="/collections/bracelet" data-link>Rings</a>
+                <div data-component="./components/navbar/_components/ring.html"></div>
+            </div>
+
+            <div class="navigation-link">
+                <a id="jewellery" class="hover-effect" href="/collections/bridal-jewellery" data-link>Jewellery</a>
+                <div data-component="./components/navbar/_components/jewellery.html"></div>
+            </div>
+
+            <div class="navigation-link">
+                <a id="collections" class="hover-effect" href="/collections/earring" data-link>Collections</a>
+                <div data-component="./components/navbar/_components/collections.html"></div>
+            </div>
+
+            <div class="navigation-link">
+                <a id="bangles" class="hover-effect active-golden" href="/collections/mens-jewellery" data-link>Bangles</a>
+                <div data-component="./components/navbar/_components/bangles.html"></div>
+            </div>
+            
+            <div class="navigation-link">
+                <a id="new-ins" class="hover-effect" href="/collections/engagement-ring" data-link>New Ins</a>
+                <div data-component="./components/navbar/_components/new-ins.html"></div>
+            </div>
+        </div>
+
+        <!-- Menu Icon (visible only on md and below) -->
+        <label for="menu-toggle" class="md:hidden menu-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <!-- Search Component -->
+        <div class="md:hidden search-container" style="border: 1px solid black;">
+            <div data-component="./components/search/search.html"></div>
+        </div>
+    </nav>
+</body>
+</html>

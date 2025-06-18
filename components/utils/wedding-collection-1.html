@@ -1,0 +1,70 @@
+<style>
+
+.wedding-collection-card a:hover img {
+    display: initial;
+}
+
+.black-effect {
+  position: relative; 
+  display: inline-block; 
+}
+
+.black-effect::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  width: 0%;
+  background-color: black; 
+  transition: all 0.2s linear;
+}
+
+.wedding-collection-card a:hover .black-effect::before {
+  width: 100%;
+}
+
+</style>
+
+<section class="text-center my-20 container mx-auto">
+
+    <p class="font-dance text-xl sm:text-2xl">First Class</p>
+    <h3 class="font-ancizar text-2xl sm:text-4xl  ">Wedding Collections</h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+        <!-- 1 -->
+        <div class="bg-gray-primay my-5 wedding-collection-card">
+            <img class="w-full" src="../../assets/images/wedding-collections/1.jpg" alt="image 1">
+
+            <a href="#" class="flex-cb p-5">
+                <span class="black-effect font-ancizar text-2xl">Discover Your Perfect Couple Ring</span>
+                <img class="hidden" src="../../assets/images/icons/arrow-tlid-u-r.svg" alt="arrow image">
+            </a>
+
+        </div>
+
+        <!-- 2 -->
+        <div class="bg-gray-primay my-5 wedding-collection-card">
+            <img class="w-full" src="../../assets/images/wedding-collections/2.png" alt="image 1">
+
+            <a href="#" class="flex-cb p-5">
+                <span class="black-effect font-ancizar text-2xl">Discover Your Perfect Couple Ring</span>
+                <img class="hidden" src="../../assets/images/icons/arrow-tlid-u-r.svg" alt="arrow image">
+            </a>
+
+        </div>
+
+        <!-- 3 -->
+        <div class="bg-gray-primay my-5 wedding-collection-card">
+            <img class="w-full" src="../../assets/images/wedding-collections/3.jpg" alt="image 1">
+
+            <a href="#" class="flex-cb p-5">
+                <span class="black-effect font-ancizar text-2xl">Discover Your Perfect Couple Ring</span>
+                <img class="hidden" src="../../assets/images/icons/arrow-tlid-u-r.svg" alt="arrow image">
+            </a>
+
+        </div>
+
+    </div>
+</section>

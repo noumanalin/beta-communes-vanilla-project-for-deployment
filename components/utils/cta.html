@@ -1,0 +1,43 @@
+<style>
+
+.cta {
+    width: 100vw;
+    color: #fff;
+    background-image: url('../../assets/images/cta.png');
+    background-attachment : scroll;
+    background-repeat : no-repeat;
+    background-size : cover;
+}
+
+.cta div form button {
+    border: 1px solid white;
+    padding: 12px 8px;
+    text-transform: capitalize;
+   transition: color 0.3s linear, border 0.3s linear;
+}
+
+.cta div form button:hover {
+    border: 1px solid var(--golden-color);
+    color: var(--golden-color);
+}
+
+
+</style>
+
+
+<section class="cta px-1 py-28 sm:px-5 text-center flex items-center justify-center ">
+    <div class="flex flex-col gap-2">
+        <h3 class="font-dance text-xl">Join Us</h3>
+        <h2 class="font-ancizar text-3xl font-bold">Subscribe Our News Letter</h2>
+        <p class="font-semibold text-[18px]">Get Our Latest Updations</p>
+
+        <form action="" class=" sm:w-[450px] flex flex-col sm:flex-row gap-2 mt-10  ">
+            <input class="px-1 py-3 flex-1 border-none outline-none text-black bg-white"  type="email" placeholder="Enter Your Email" required>
+            <button class=" font-ancizar text-2xl">
+                join now
+            </button>
+        </form>
+
+        <p class="font-semibold text-[18px]">Join our mail list and get the best offers</p>
+    </div>
+</section>

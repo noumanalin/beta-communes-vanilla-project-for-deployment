@@ -1,0 +1,100 @@
+<style>
+
+.wedding2-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.wedding2-card .bg-img {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform 0.5s ease;
+    z-index: 0;
+}
+
+/* Gray overlay on hover */
+.wedding2-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(255, 255, 255, 0); /* No overlay by default */
+    transition: background-color 0.5s ease;
+    z-index: 1;
+}
+
+.wedding2-card:hover::before {
+    background-color: rgba(211, 211, 211, 0.3); /* Light gray tint */
+}
+
+
+.wedding2-card:hover .bg-img {
+    transform: scale(1.1) rotate(3deg);
+}
+
+.wedding2-card div a:hover {
+    color: var(--golden-color);
+}
+</style>
+
+
+<section class="container mx-auto text-center my-10">
+    <p class="font-dance text-xl sm:text-2xl">Trending</p>
+    <h3 class="font-ancizar text-2xl sm:text-4xl  ">Wedding Collection</h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left my-5">
+        <!-- 1 -->
+        <div class="wedding2-card h-[600px] relative ">
+
+            <!-- Background image -->
+            <div class="bg-img" style="background-image: url('../../assets/images/wedding-collections/4.png');"></div>
+
+            <!-- Content -->
+            <div class="relative z-10 p-8 h-full flex flex-col  text-white">
+                <h3 class="font-ancizar text-4xl font-semibold mb-2">Stunning Diamond Engagement Rings</h3>
+                <p class="mb-4 text-xl">Praesent eget tellus eleifend, rhoncus mauris quis, fermentum lacus.</p>
+                <a href="#" class="font-ancizar text-2xl underline flex items-center gap-3">
+                <img src="../../assets/images/icons/arrow-tlid-u-r.svg" alt="arrow image" class="w-4 h-4" />
+                <span>Read More</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 2 -->
+       <div class="wedding2-card h-[600px] relative">
+
+            <!-- Background image -->
+            <div class="bg-img" style="background-image: url('../../assets/images/wedding-collections/5.png');"></div>
+
+            <!-- Content -->
+            <div class="relative z-10 p-8 h-full flex flex-col  ">
+                <h3 class="font-ancizar text-4xl font-semibold mb-2">Favourite Couples Gold Wedding Rings</h3>
+                <p class="mb-4 text-xl">Leo in vitae turpis massa sed. Pellentesque nec nam aliquam semt.</p>
+                <a href="#" class="font-ancizar text-2xl underline flex items-center gap-3">
+                <img src="../../assets/images/icons/arrow-tlid-u-r.svg" alt="arrow image" class="w-4 h-4" />
+                <span>Read More</span>
+                </a>
+            </div>
+        </div>
+
+         <!-- 3 -->
+<div class="wedding2-card h-[600px] relative">
+
+            <!-- Background image -->
+            <div class="bg-img" style="background-image: url('../../assets/images/wedding-collections/6.png');"></div>
+
+            <!-- Content -->
+            <div class="relative z-10 p-8 h-full flex flex-col  ">
+                <h3 class="font-ancizar text-4xl font-semibold mb-2">Every Day Wear Modern Bracelet</h3>
+                <p class="mb-4 text-xl">Nisl nisi scelerisque eu ultrices vitae. Morbi tempus iaculis urna grfuhs.</p>
+                <a href="#" class="font-ancizar text-2xl underline flex items-center gap-3">
+                <img src="../../assets/images/icons/arrow-tlid-u-r.svg" alt="arrow image" class="w-4 h-4" />
+                <span>Read More</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>

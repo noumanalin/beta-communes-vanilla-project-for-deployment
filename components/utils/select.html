@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Optional: smooth transitions */
+        #dropdownMenu {
+            transition: all 0.2s ease;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="relative inline-block text-left w-[100px]">
+  <button id="dropdownButton" class=" text-sm px-2 py-1 flex items-center justify-between gap-1 uppercase">
+    <img src="../../assets/images/icons/flags/us.svg" class="w-4 h-4" alt="usd flag">
+    <span>usd</span>
+    <svg class="w-4 h-4 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+
+  <ul id="dropdownMenu" class="hidden absolute z-10 w-full bg-white border border-gray-300 mt-1 text-sm h-auto shadow-md">
+    <li data-value="usd" class="flex items-center gap-2 px-2 py-1 hover:text-golden uppercase cursor-pointer">
+      <img src="../../assets/images/icons/flags/us.svg" class="w-4 h-4" alt="usd"> usd
+    </li>
+    <li data-value="aed" class="flex items-center gap-2 px-2 py-1 hover:text-golden uppercase cursor-pointer">
+      <img src="../../assets/images/icons/flags/ae.svg" class="w-4 h-4" alt="aed"> aed
+    </li>
+    <li data-value="aoa" class="flex items-center gap-2 px-2 py-1 hover:text-golden uppercase cursor-pointer">
+      <img src="../../assets/images/icons/flags/ao.svg" class="w-4 h-4" alt="aoa"> aoa
+    </li>
+    <li data-value="aud" class="flex items-center gap-2 px-2 py-1 hover:text-golden uppercase cursor-pointer">
+      <img src="../../assets/images/icons/flags/au.svg" class="w-4 h-4" alt="aud"> aud
+    </li>
+    <li data-value="bwp" class="flex items-center gap-2 px-2 py-1 hover:text-golden uppercase cursor-pointer">
+      <img src="../../assets/images/icons/flags/bw.svg" class="w-4 h-4" alt="bwp"> bwp
+    </li>
+    <li data-value="cad" class="flex items-center gap-2 px-2 py-1 hover:text-golden uppercase cursor-pointer">
+      <img src="../../assets/images/icons/flags/ca.svg" class="w-4 h-4" alt="cad"> cad
+    </li>
+    <li data-value="dzd" class="flex items-center gap-2 px-2 py-1 hover:text-golden uppercase cursor-pointer">
+      <img src="../../assets/images/icons/flags/dz.svg" class="w-4 h-4" alt="dzd"> dzd
+    </li>
+    <li data-value="eur" class="flex items-center gap-2 px-2 py-1 hover:text-golden uppercase cursor-pointer">
+      <img src="../../assets/images/icons/flags/eu.svg" class="w-4 h-4" alt="eur"> eur
+    </li>
+    <li data-value="gbp" class="flex items-center gap-2 px-2 py-1 hover:text-golden uppercase cursor-pointer">
+      <img src="../../assets/images/icons/flags/gb.svg" class="w-4 h-4" alt="gbp"> gbp
+    </li>
+  </ul>
+</div>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  const dropdownBtn = document.getElementById('dropdownButton');
+  const dropdownMenu = document.getElementById('dropdownMenu');
+
+  dropdownBtn.addEventListener('click', () => {
+    dropdownMenu.classList.toggle('hidden');
+  });
+
+  dropdownMenu.querySelectorAll('li').forEach(item => {
+    item.addEventListener('click', () => {
+      const imgSrc = item.querySelector('img').src;
+      const currency = item.getAttribute('data-value');
+
+      dropdownBtn.querySelector('img').src = imgSrc;
+      dropdownBtn.querySelector('span').textContent = currency;
+
+      dropdownMenu.classList.add('hidden');
+    });
+  });
+
+  // Optional: close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!dropdownBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+      dropdownMenu.classList.add('hidden');
+    }
+  });
+</script>
+</body>
+</html>
+
+
+
+
+
+

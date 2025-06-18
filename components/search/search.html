@@ -1,0 +1,19 @@
+<form action="" id="searchForm" class="flex gap-[2px] md:gap-[5px] max-w-[211px] p-[2px] md:p-[5px] bg-white border border-transparent transition-colors">
+  <img src="../../assets/images/icons/search.svg" class="w-[15px] h-[15px] flex-1" alt="">
+  <input type="text" class="outline-none border-none w-full bg-white">
+</form>
+
+<script>
+  const form = document.getElementById('searchForm');
+  const input = form.querySelector('input');
+
+  form.addEventListener('click', function () {
+    form.classList.remove('border-transparent');
+    form.classList.add('border-[#b68f35]');
+  });
+
+  input.addEventListener('blur', function () {
+    form.classList.remove('border-[#b68f35]');
+    form.classList.add('border-transparent');
+  });
+</script>

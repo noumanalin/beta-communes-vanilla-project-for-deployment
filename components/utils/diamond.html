@@ -1,0 +1,44 @@
+<style>
+  .div-media img {
+    animation: imgAnimate 8s ease-in-out infinite;
+    transform-origin: center;
+  }
+
+  @keyframes imgAnimate {
+    0% {
+      transform: scale(1);
+    }
+    33.33% {
+      transform: scale(1.02);
+    }
+    66.66% {
+      transform: scale(1.04);
+    }
+    100% {
+      transform: scale(1.02);
+    }
+  }
+</style>
+
+
+<section class="container mx-auto my-15 flex flex-col md:flex-row gap-10 items-center ">
+
+    <div class="div-media flex-1">
+        <img class="w-full  sm:h-[450px]" src="../../assets/images/diamond-jewellery.png" alt="diamond-jewellery Image">
+    </div>
+
+    <div class="div-content text-center sm:text-left md:w-[600px]">
+        <h2 class="font-ancizar text-6xl font-bold">Most Beatiful Diamond <br> Jewellery For You</h2>
+        <p class="my-2">Sed viverra ipsum nunc aliquet bibendum enim facilisis <br>
+            gravida neque. Mattis ullamcorper velit sed ullamcorper <br>
+            morbi tincidunt. Et netus et malesuada fames ac turpis <br>
+             egestas maecenas.
+        </p>
+
+<a href="#" class="font-ancizar  underline text-xl capitalize my-2 flex justify-center sm:justify-start gap-3 hover:text-[#b68f35] hover:font-bold">
+            <img class="w-4" src="../../assets/images/icons/arrow-tlid-u-r.svg" alt="arrow">
+            <span>shop now</span>
+        </a>
+    </div>
+
+</section>

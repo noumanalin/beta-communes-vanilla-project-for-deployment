@@ -1,0 +1,57 @@
+<style>
+.cart-a:hover img {
+  transform: scale(1.01) rotate(2deg);
+  transition: all 0.3s linear;
+}
+
+.black-effect {
+  position: relative; 
+  display: inline-block; 
+}
+
+.black-effect::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  width: 0%;
+  background-color: black; /* Fixed here */
+  transition: all 0.2s linear;
+}
+
+.cart-a:hover .black-effect::before {
+  width: 100%;
+}
+
+
+</style>
+
+<section class="text-center my-20 container mx-auto">
+    <p class="font-dance text-xl sm:text-2xl">Customized Jewellery</p>
+    <h3 class="font-ancizar text-2xl sm:text-4xl  ">Check Out Our Collections</h3>
+
+    <div class="grid place-items-center gap-2 md:gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-10">
+
+        <a href="#" class="cart-a text-center my-3">
+            <img class="w-[327px] h-[432px]" src="../../assets/images/checkout-collection/1.png" alt="image 1">       
+            <p class="black-effect text-xl capitalize font-bold my-5">diamond bracelets</p>
+        </a>
+
+        <a href="#" class="cart-a text-center my-3">
+            <img class="w-[327px] h-[432px]" src="../../assets/images/checkout-collection/2.png" alt="image 1">          
+            <p class="black-effect text-xl capitalize font-bold my-5">diamond bracelets</p>
+        </a>
+
+        <a href="#" class="cart-a text-center my-3">
+            <img class="w-[327px] h-[432px]" src="../../assets/images/checkout-collection/3.png" alt="image 1">           
+            <p class="black-effect text-xl capitalize font-bold my-5">diamond bracelets</p>
+        </a>
+
+        <a href="#" class="cart-a text-center my-3">
+            <img class="w-[327px] h-[432px]" src="../../assets/images/checkout-collection/4.png" alt="image 1">           
+            <p class="black-effect text-xl capitalize font-bold my-5">diamond bracelets</p>
+        </a>
+    </div>
+
+</section>
